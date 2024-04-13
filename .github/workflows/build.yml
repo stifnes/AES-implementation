@@ -36,5 +36,5 @@ jobs:
       
     - name: Run unit tests
       run: |
-        chmod +x run_tests.sh
-        ./run_tests.sh
+        chmod +x run_tests.c
+        ./run_tests.c
