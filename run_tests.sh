@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Include the AES implementation header file
 source ./rijndael.h
 
