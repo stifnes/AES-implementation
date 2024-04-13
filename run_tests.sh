@@ -7,8 +7,8 @@ key="0123456789abcdef0123456789abcdef"
 expected_ciphertext="8b0a793de2f9c5a3b2c8b9c0d3e4f5a6"
 expected_plaintext="Hello, world!"
 
-ciphertext=$(aes_encrypt "$plaintext" "$key")
-decrypted_plaintext=$(aes_decrypt "$ciphertext" "$key")
+ciphertext=$(aes_encrypt_block "$plaintext" "$key")
+decrypted_plaintext=$(aes_decrypt_block "$ciphertext" "$key")
 
 if [[ "$ciphertext" == "$expected_ciphertext" && "$decrypted_plaintext" == "$expected_plaintext" ]]; then
   echo "Test case 1 passed"
@@ -22,8 +22,8 @@ key="0123456789abcdef0123456789abcdef"
 expected_ciphertext=""
 expected_plaintext=""
 
-ciphertext=$(aes_encrypt "$plaintext" "$key")
-decrypted_plaintext=$(aes_decrypt "$ciphertext" "$key")
+ciphertext=$(aes_encrypt_block "$plaintext" "$key")
+decrypted_plaintext=$(aes_decrypt_block "$ciphertext" "$key")
 
 if [[ "$ciphertext" == "$expected_ciphertext" && "$decrypted_plaintext" == "$expected_plaintext" ]]; then
   echo "Test case 2 passed"
