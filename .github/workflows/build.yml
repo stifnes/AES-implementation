@@ -35,6 +35,4 @@ jobs:
         make
       
     - name: Run unit tests
-      run: |
-        ./run_tests.c
-        ./run_tests.sh
+      run: ./run_tests.sh
