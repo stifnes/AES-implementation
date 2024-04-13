@@ -1,12 +1,36 @@
-name: Build the project
-on: push
+# name: Build the project
+# on: push
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Clone the repo
+#         uses: actions/checkout@v4
+#       - name: Build the code
+#         run: |
+#           sudo apt install -y build-essential python-is-python3
+#           make
+
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Clone the repo
-        uses: actions/checkout@v4
-      - name: Build the code
-        run: |
-          sudo apt install -y build-essential python-is-python3
-          make
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up C compiler
+      run: sudo apt-get install gcc
+      
+    - name: Build AES library
+      run: make
+      
+    - name: Run unit tests
+      run: ./run_tests.sh
