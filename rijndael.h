@@ -8,6 +8,9 @@
 
 #define BLOCK_ACCESS(block, row, col) (block[(row * 4) + col])
 #define BLOCK_SIZE 16
+#define NUM_ROUNDS 10
+
+unsigned char *expand_key(unsigned char *cipher_key);
 
 /*
  * These should be the main encrypt/decrypt functions (i.e. the main
