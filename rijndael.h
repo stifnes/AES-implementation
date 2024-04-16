@@ -16,9 +16,9 @@ void AES_decrypt(unsigned char * plain_text, unsigned char * key);
 void AES_encrypt(unsigned char * plain_text, unsigned char * key);
 
 //public functions
-unsigned char *aes_ecb_encrypt(unsigned char * plain_text, unsigned char* key, int text_length);
-unsigned char *aes_ecb_decrypt(unsigned char * plain_text, unsigned char* key, int text_length);
-unsigned char *aes_cbc_encrypt(unsigned char * plain_text, unsigned char* key, int text_length, unsigned char * iv);
-unsigned char *aes_cbc_decrypt(unsigned char * plain_text, unsigned char* key, int text_length, unsigned char * iv);
+void aes_ecb_encrypt(unsigned char * plain_text, unsigned char* key, int text_length);
+void aes_ecb_decrypt(unsigned char * plain_text, unsigned char* key, int text_length);
+void aes_cbc_encrypt(unsigned char * plain_text, unsigned char* key, int text_length, unsigned char * iv);
+void aes_cbc_decrypt(unsigned char * plain_text, unsigned char* key, int text_length, unsigned char * iv);
 
 #endif
