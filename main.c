@@ -26,7 +26,7 @@ int main() {
   unsigned char key[16] = {50, 20, 46, 86, 67, 9, 70, 27,
                            75, 17, 51, 17, 4,  8, 6,  99};
 
-  unsigned char *ciphertext = aes_encrypt_block(plaintext, key);
+  unsigned char *ciphertext = aes_ecb_encrypt(plaintext, key, 16);
   unsigned char *recovered_plaintext = aes_decrypt_block(ciphertext, key);
 
   printf("############ ORIGINAL PLAINTEXT ###########\n");
