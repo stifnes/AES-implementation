@@ -1,3 +1,12 @@
+/*
+ * D22124468 - Stifnes Samuel
+ * This code is an implementation of the Rijndael encryption algorithm.
+ * It includes functions for encrypting and decrypting messages using
+ * the Electronic Code Book (ECB) and Cipher Block Chaining (CBC) modes.
+ * The code is split into three files: rijndael.h, rijndael.c, and main.c.
+ * This contains the implementation of the encryption and decryption functions. main.c
+ * and all the functions that will be used by the main encryption and decryption functions.
+ */
 
 #include <string.h>
 #include <stdio.h>
@@ -48,27 +57,6 @@ unsigned char inv_s[256] =
 	0x17, 0x2B, 0x04, 0x7E, 0xBA, 0x77, 0xD6, 0x26, 0xE1, 0x69, 0x14, 0x63, 0x55, 0x21, 0x0C, 0x7D
 };
 
-
-// Multiplication in GF(2^8) with reduction polynomial x^8 + x^4 + x^3 + x + 1
-unsigned char gmul(unsigned char rhs, unsigned char lhs) {
-	unsigned char result = 0;
-	unsigned int mask = 0x11b;
-	while (lhs) {
-		if (lhs & 1) {
-			result = result ^ rhs;
-		}
-		if (rhs & 0x80) {
-			rhs = (rhs << 1) ^ mask;
-		}
-		else {
-			rhs = rhs << 1;
-		}
-		lhs = lhs >> 1;
-	}
-	return result;
-}
-
-
 unsigned char rcon[BLOCK_SIZE] = {
 	//only need first 16 values
 	0x8d, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36, 0x6c, 0xd8, 0xab, 0x4d, 0x9a
@@ -90,6 +78,29 @@ unsigned char rcon[BLOCK_SIZE] = {
 	0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d
 	*/
 };
+
+
+// Multiplication in GF(2^8) with reduction polynomial x^8 + x^4 + x^3 + x + 1
+unsigned char gmul(unsigned char rhs, unsigned char lhs) {
+	unsigned char result = 0;
+	unsigned int mask = 0x11b;
+	while (lhs) {
+		if (lhs & 1) {
+			result = result ^ rhs;
+		}
+		if (rhs & 0x80) {
+			rhs = (rhs << 1) ^ mask;
+		}
+		else {
+			rhs = rhs << 1;
+		}
+		lhs = lhs >> 1;
+	}
+	return result;
+}
+
+
+
 
 void KeyExpansion(unsigned char* inputKey, unsigned char* expandedKeys) {
 
@@ -132,7 +143,7 @@ void KeyExpansion(unsigned char* inputKey, unsigned char* expandedKeys) {
 }
 
 
-void AddRoundKey(unsigned char * plain_text, unsigned char * roundKey)
+void AddRoundKey(unsigned char * plain_text, unsigned char * roundKey) 
 {
 	for (int i = 0; i < BLOCK_SIZE; i++) {
 		plain_text[i] = plain_text[i] ^ roundKey[i];
